@@ -3,7 +3,21 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session')
 var bodyParser = require('body-parser');
+
+
+//MONGOOSE
+var mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/auth')
+
+//PASPORT
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -20,7 +34,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret: 'abcdefgh',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 6000000
+  }
+}))
 app.use(express.static(path.join(__dirname, 'public')));
+
+// passport.use(new LocalStrategy(Profile.authenticate()))
 
 app.use('/', routes);
 app.use('/users', users);
