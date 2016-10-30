@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session')
 var bodyParser = require('body-parser');
 
+var User = require('./models/user')
 
 //MONGOOSE
 var mongoose = require('mongoose')
@@ -44,10 +45,19 @@ app.use(session({
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
-// passport.use(new LocalStrategy(Profile.authenticate()))
+passport.use(new LocalStrategy(User.authenticate()))
+
+
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', routes);
 app.use('/users', users);
+
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

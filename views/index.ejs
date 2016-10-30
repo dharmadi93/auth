@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+
+  <% include head.ejs %>
+
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+  <% include top_nav.ejs %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-center">Welcome</h1>
+
+        <% if (typeof (user) != "undefined") { %>
+          <table class="table">
+            <tr>
+              <td>No.</td>
+              <td>Name</td>
+              <td>Username</td>
+              <td>Email</td>
+            </tr>
+
+            <% for (var i = 0; i < list.length; i++) {%>
+            <tr>
+              <td><%= i+1%></td>
+              <td><%= list[i].name%></td>
+              <td><%= list[i].username%></td>
+              <td><%= list[i].email%></td>
+            </tr>
+            <% } %>
+          </table>
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+
+  <% include scripts.ejs %>
   </body>
 </html>
