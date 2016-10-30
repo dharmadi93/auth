@@ -19,6 +19,12 @@
               <td>Name</td>
               <td>Username</td>
               <td>Email</td>
+              <td>Role</td>
+              <td>CreatedAt</td>
+              <td>UpdatedAt</td>
+              <% if (user.role == "admin") { %>
+              <td>Action</td>
+              <% } %>
             </tr>
 
             <% for (var i = 0; i < list.length; i++) {%>
@@ -27,6 +33,17 @@
               <td><%= list[i].name%></td>
               <td><%= list[i].username%></td>
               <td><%= list[i].email%></td>
+              <td><%= list[i].role%></td>
+              <td><%= list[i].createdAt%></td>
+              <td><%= list[i].updatedAt%></td>
+              <% if (user.role == "admin") { %>
+              <td>
+                <span class="pull-right">
+                  <a href="/edit/<%= list[i].id%>" class="btn btn-warning">Edit</a>
+                  <a href="/delete" class="btn btn-danger">Delete</a>
+                </span>
+              </td>
+              <% } %>
             </tr>
             <% } %>
           </table>

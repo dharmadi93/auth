@@ -2,8 +2,6 @@ var passport = require('passport')
 var User = require('../models/user')
 
 function viewhome (req, res) {
-    console.log(req.user)
-
     User.find({}, function (err, data) {
         res.render('index', { user: req.user, list:data })
     })
@@ -21,7 +19,10 @@ function localRegister(req, res, next) {
     User.register(new User({
         name: req.body.name,
         username: req.body.username,
-        email: req.body.email
+        email: req.body.email,
+        role: 'siswa',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
     }), req.body.password, function (err) {
         if (err) {
             console.log(err)
@@ -39,6 +40,35 @@ function localRegister(req, res, next) {
                 res.redirect('/')
             })
         })
+    })
+}
+
+function viewEdit(req, res) {
+    User.findOne({
+        _id: req.params.id
+    }, function (err, data) {
+        if (err) {
+            console.log(err)
+        }
+        res.render('edit', { user: data })
+    })
+}
+
+function editUser(req, res) {
+    User.findOneAndUpdate({
+        _id: req.body.id
+    }, {
+        $set: {
+            name: req.body.name,
+            email: req.body.email
+        }
+    }, {
+        new: true
+    }, function (err) {
+        if (err) {
+            console.log(err)
+        }
+        res.redirect('/')
     })
 }
 
@@ -80,6 +110,8 @@ module.exports = {
     viewRegister: viewRegister,
     viewLogin: viewLogin,
     localRegister: localRegister,
+    viewEdit: viewEdit,
+    editUser: editUser,
     login: login,
     isAuthenticate:isAuthenticate,
     isLogin: isLogin,
