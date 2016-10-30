@@ -44,8 +44,41 @@ npm install passport-local --save
 npm install passport-local-mongoose --save
 ```
 
-## install Passport Facebook
+## Screenshot
 
-```
-npm install passport-facebook --save
-```
+### Home
+
+Tampilan utama tidak login
+
+![Home](./public/images/home.png)
+
+### Login
+
+Tampilan login
+
+![Home](./public/images/login.png)
+
+### Register
+
+Tampilan register
+
+![Home](./public/images/register.png)
+
+### Admin Home
+
+Tampilan utama login admin
+
+![Home](./public/images/admin_home.png)
+
+### Admin Edit
+
+Tampilan edit untuk admin
+
+![Home](./public/images/edit.png)
+
+### Sisw Home
+
+Tampilan Utama login siswa
+
+![Home](./public/images/siswa_home.png)
+
