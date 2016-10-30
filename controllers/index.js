@@ -13,7 +13,7 @@ function viewRegister (req, res) {
     res.render('register', {})
 }
 function viewLogin (req, res) {
-    res.render('login', {})
+    res.render('login', { message: req.flash('message') })
 }
 
 
@@ -43,8 +43,18 @@ function localRegister(req, res, next) {
 }
 
 function login(req, res) {
-    res.redirect('/')
+    // res.redirect('/')
+
 }
+
+// function login() {
+//     // res.redirect('/')
+//     passport.authenticate('local', {
+//         successRedirect: '/',
+//         failureRedirect: '/login',
+//         failureFlash: true
+//     })
+// }
 
 function isAuthenticate (req, res, next) {
     if (req.isAuthenticated())

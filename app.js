@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session')
+var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 
 var User = require('./models/user')
@@ -51,6 +52,7 @@ passport.use(new LocalStrategy(User.authenticate()))
 
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash());
 
 app.use('/', routes);
 app.use('/users', users);

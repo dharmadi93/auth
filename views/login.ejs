@@ -6,6 +6,10 @@
 <body>
 <% include top_nav.ejs %>
 
+<% if (message.length > 0) { %>
+<div class="alert alert-danger"><%= message %></div>
+<% } %>
+
 <div class="login-page">
     <div class="container-fluid container-table">
         <div class="row vertical-center-row">
@@ -18,7 +22,7 @@
                         <div class="form-group-lg">
                             <input type="password" class="form-control" name="password" placeholder="password"/>
                         </div>
-                        <button class="btn btn-success">login</button>
+                        <button type="submit" class="btn btn-success">login</button>
                     </form>
                 </div>
             </div>
