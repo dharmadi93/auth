@@ -72,6 +72,17 @@ function editUser(req, res) {
     })
 }
 
+function deleteUser(req, res) {
+    User.findOneAndRemove({
+        _id: req.params.id
+    }, function (err) {
+        if (err) {
+            console.log(err)
+        }
+        res.redirect('/')
+    })
+}
+
 function login(req, res) {
     // res.redirect('/')
 
@@ -112,6 +123,7 @@ module.exports = {
     localRegister: localRegister,
     viewEdit: viewEdit,
     editUser: editUser,
+    deleteUser: deleteUser,
     login: login,
     isAuthenticate:isAuthenticate,
     isLogin: isLogin,

@@ -23,6 +23,8 @@ router.post('/login',
 router.get('/edit/:id', controller.isAuthenticate, controller.viewEdit)
 router.post('/edit', controller.editUser)
 
+router.get('/delete/:id', controller.deleteUser)
+
 router.get('/logout', controller.logout)
 
 module.exports = router;
